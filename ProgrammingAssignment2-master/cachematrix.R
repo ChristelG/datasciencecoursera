@@ -5,16 +5,15 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
+  #function inside other function is called closure; it inherits from parent
   set <- function(y) {
     x <<- y
     m <<- NULL
   }
   get <- function() x
-  setinverse <- function(solve) m <<- solve
+  setinverse <- function() m <<- solve(x)
   getinverse <- function() m
-  list(set = set, get = get,
-       setinverse = setinverse,
-       getinverse = getinverse)
+  list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
 }
 
 
@@ -24,10 +23,12 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
   ## Return a matrix that is the inverse of 'x'
   m <- x$getinverse()
+  #if cashed -> retrieve
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
   }
+  #if not cached -> solve
   data <- x$get()
   m <- solve(data, ...)
   x$setinverse(m)
