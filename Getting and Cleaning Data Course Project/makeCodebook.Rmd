@@ -1,0 +1,49 @@
+Codebook
+========
+Generated on `r as.character(Sys.time())` during the same process that generated 'tidy_data.txt'.
+
+Variable list and descriptions
+------------------------------
+
+Variable name    | Description
+-----------------|------------
+featureCode      | Code of feature for easy lookup in 'features.txt'
+subject          | ID the subject who performed the activity for each window sample. Its range is from 1 to 30.
+activityNum      | Number corresponding to activity. Ranges from 1 to 6.
+activityName     | Name of the activity. Factor with 6 levels.
+value            | Value which is the combination of train- and testdata
+featureNum       | Number corresponding to feature in 'features.txt'
+featureName      | Names of features as given in 'features.txt'
+
+Datatable structure
+-----------------
+
+```{r}
+str(dt)
+```
+
+
+Show a few rows of the dataset
+------------------------------
+
+```{r}
+head(dt)
+tail(dt)
+```
+
+Summary of variables
+--------------------
+
+```{r}
+summary(dt)
+```
+
+Save to file
+------------
+
+Save data table objects to a tab-delimited text file called `"tidy_data.txt"`.
+
+```{r save}
+write.table(tidyData, "tidy_data.txt", row.names = FALSE, quote = FALSE,col.names = TRUE, sep="\t")
+
+```
